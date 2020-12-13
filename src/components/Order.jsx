@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
+import { useHistory } from 'react-router-dom';
+
 const containerVariants = {
   hidden: {
     opacity: 0,
@@ -33,9 +35,15 @@ const childVariants = {
 };
 
 const Order = ({ pizza, setShowModal }) => {
+  const history = useHistory();
+
   useEffect(() => {
-    setTimeout(() => setShowModal(true), 5000);
-  }, [setShowModal]);
+    if (pizza.toppings.length === 0) {
+      history.push('/toppings');
+    } else {
+      setTimeout(() => setShowModal(true), 5000);
+    }
+  }, [pizza, history, setShowModal]);
 
   return (
     <motion.div

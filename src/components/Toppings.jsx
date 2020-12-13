@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const containerVariants = {
@@ -31,6 +31,14 @@ const buttonVariants = {
 };
 
 const Toppings = ({ addTopping, pizza }) => {
+  const history = useHistory();
+
+  useEffect(() => {
+    if (pizza.base === '') {
+      history.push('/base');
+    }
+  }, [pizza, history]);
+
   let toppings = [
     'mushrooms',
     'peppers',
